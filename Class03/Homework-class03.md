@@ -16,8 +16,6 @@
 
 8. Add POST method that adds new book to the list of books (use the FromBody attribute)
 
-Try out PostMan and Swagger
-
 ## Bonus
 
 Add POST method that accepts list of  books from the body of the request and returns their titles as a list of strings.

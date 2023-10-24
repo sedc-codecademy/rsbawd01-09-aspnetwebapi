@@ -1,0 +1,85 @@
+{
+	"info": {
+		"_postman_id": "5a99e3c8-a534-4937-8676-edeefbb25769",
+		"name": "Project X",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29938124"
+	},
+	"item": [
+		{
+			"name": "https://localhost:7261/api/notes/150",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7261/api/notes/150",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7261",
+					"path": [
+						"api",
+						"notes",
+						"150"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:7261/api/notes/queryString?index=1212&userId=99",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7261/api/notes/queryString?index=1212&userId=99",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7261",
+					"path": [
+						"api",
+						"notes",
+						"queryString"
+					],
+					"query": [
+						{
+							"key": "index",
+							"value": "1212"
+						},
+						{
+							"key": "userId",
+							"value": "99"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://localhost:7261/api/notes/sport/priority/1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7261/api/notes/sport/priority/1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7261",
+					"path": [
+						"api",
+						"notes",
+						"sport",
+						"priority",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
