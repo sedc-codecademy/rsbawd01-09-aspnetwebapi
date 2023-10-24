@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using SEDC.NotesAndTagsApp.Models;
 
 namespace SEDC.NotesAndTagsApp.Controllers
 {
@@ -50,5 +52,45 @@ namespace SEDC.NotesAndTagsApp.Controllers
             return response;
         }
 
+        [HttpGet("customHeaderData")]
+        public ActionResult GetHeader([FromHeader(Name = "SEDC-Header-Data")] string customHeaderData) 
+        {
+            // This is for testing only we are returing
+            // the passed values to see the result
+            return Ok(customHeaderData);
+        }
+
+        [HttpGet("userAgent")]
+        public ActionResult GetUserAgentHeader([FromHeader(Name = "User-Agent")] string userAgent)
+        {
+            // This is for testing only we are returing
+            // the passed values to see the result
+            return Ok(userAgent);
+        }
+
+        [HttpPost("postNote")]
+        public ActionResult PostNote([FromBody] Note note) 
+        {
+            if (note == null)
+                return BadRequest();
+
+            // This is for testing only we are returing
+            // the passed values to see the result
+            return Ok(note);
+        }
+
+        [HttpPost("postNoteQuery")]
+        public ActionResult PostNoteViaQueryParam([FromQuery] Note note)
+        { 
+            if (note == null)
+                return BadRequest();
+
+            note.Content = "Editovana moja vrijednost";
+
+            // This is for testing only we are returing
+            // the passed values to see the result
+
+            return Ok(note);
+        }
     }
 }
