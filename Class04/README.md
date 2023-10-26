@@ -87,3 +87,15 @@
 - Implement validation for the provided data, including checking for the text field being non-empty, the existence of the associated user, and the existence of tags.
 - Create a new note if all validations pass and return a success response.
 
+### Exercise 8: Test everything using the Postman in the following order:
+- Get all notes
+- Get particular note
+- Update particular note
+- Get all notes
+- Add new note
+- Get all notes
+- Delete some note
+- Get all notes
+- ... make sure that every test is passed and the code is working properly
+
+
