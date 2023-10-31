@@ -26,7 +26,7 @@ namespace SEDC.NotesAndTagsApp.Controllers
         }
 
         // https://localhost:7261/api/notes/102
-        [HttpGet("{index}")]
+        [HttpGet("{indexyyyyyyyy}")]
         public ActionResult<string> GetByIndex(int index) 
         {
             string response = "This end-point is based on parameters" +
