@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace EF.DatabaseFirst.Example.Models;
+namespace EF.DatabaseFirst.DAL.Models;
 
 public partial class Teacher
 {
@@ -11,5 +11,5 @@ public partial class Teacher
 
     public string? LastName { get; set; }
 
-    public virtual ICollection<Course> Courses { get; set; } = new List<Course>();
+    //public virtual ICollection<Course> Courses { get; set; } = new List<Course>();
 }

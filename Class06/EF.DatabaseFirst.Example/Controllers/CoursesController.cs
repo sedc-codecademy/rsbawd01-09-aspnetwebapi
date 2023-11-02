@@ -1,6 +1,7 @@
-﻿using EF.DatabaseFirst.Example.Models;
+﻿using EF.DatabaseFirst.DAL.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace EF.DatabaseFirst.Example.Controllers
 {
@@ -18,7 +19,11 @@ namespace EF.DatabaseFirst.Example.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            var response = _academyExampleContext.Courses.ToList();
+            List<Course> response = _academyExampleContext
+                .Courses
+                .Include(c => c.Teacher)
+                //.Where(c => c.Teacher.FirstName == "Zoran")
+                .ToList();
 
             return Ok(response);
         }

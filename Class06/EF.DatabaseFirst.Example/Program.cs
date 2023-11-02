@@ -1,4 +1,4 @@
-using EF.DatabaseFirst.Example.Models;
+using EF.DatabaseFirst.DAL.Models;
 
 namespace EF.DatabaseFirst.Example
 {

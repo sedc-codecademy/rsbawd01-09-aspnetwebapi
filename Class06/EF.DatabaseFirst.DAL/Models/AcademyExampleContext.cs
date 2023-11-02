@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
-namespace EF.DatabaseFirst.Example.Models;
+namespace EF.DatabaseFirst.DAL.Models;
 
 public partial class AcademyExampleContext : DbContext
 {
@@ -25,6 +25,7 @@ public partial class AcademyExampleContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        // Data annotations for SQL Server inside of our classes using FluentAPI
         modelBuilder.Entity<Course>(entity =>
         {
             entity.HasKey(e => e.CourseId).HasName("PK_CourseId");
@@ -32,9 +33,9 @@ public partial class AcademyExampleContext : DbContext
             entity.Property(e => e.Description).HasMaxLength(500);
             entity.Property(e => e.Title).HasMaxLength(100);
 
-            entity.HasOne(d => d.Teacher).WithMany(p => p.Courses)
-                .HasForeignKey(d => d.TeacherId)
-                .HasConstraintName("FK_TeacherId");
+            //entity.HasOne(d => d.Teacher).WithMany(p => p.Courses)
+            //    .HasForeignKey(d => d.TeacherId)
+            //    .HasConstraintName("FK_TeacherId");
         });
 
         modelBuilder.Entity<Teacher>(entity =>
