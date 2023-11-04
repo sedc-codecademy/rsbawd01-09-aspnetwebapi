@@ -1,4 +1,5 @@
-﻿using SEDC.NotesApp.Domain.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using SEDC.NotesApp.Domain.Models;
 
 namespace SEDC.NotesApp.DataAccess.Implementations
 {
@@ -13,27 +14,35 @@ namespace SEDC.NotesApp.DataAccess.Implementations
 
         public void Add(Note entity)
         {
-            throw new NotImplementedException();
+            _notesAppDbContext.Notes.Add(entity);
+            _notesAppDbContext.SaveChanges(); //call to db
         }
 
         public void Delete(Note entity)
         {
-            throw new NotImplementedException();
+            _notesAppDbContext.Notes.Remove(entity);
+            _notesAppDbContext.SaveChanges(); //call to db
         }
 
         public List<Note> GetAll()
         {
-            throw new NotImplementedException();
+            return _notesAppDbContext.Notes
+                .Include(x => x.User) //join Notes table with Users table
+                .ToList();
         }
 
         public Note GetById(int id)
         {
-            throw new NotImplementedException();
+            return _notesAppDbContext.Notes
+                .Where(x => x.Id == id)
+                .Include(x => x.User)
+                .FirstOrDefault();
         }
 
         public void Update(Note entity)
         {
-            throw new NotImplementedException();
+            _notesAppDbContext.Notes.Update(entity);
+            _notesAppDbContext.SaveChanges(); //call to db
         }
     }
 }
