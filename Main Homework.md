@@ -1,5 +1,10 @@
 # Loto3000 App 🎲
 
+## Story ✏
+
+The client sent you an email (user story) that contains information about the project that your team needs to implement.
+Create the base needed to start work. This means that you need to define the necessary tables with data examples, primary and foreign keys and other necessary metadata. Define the necessary steps and phases of project development, as well as the necessary information needed for the realization of each step.
+
 ## Requirements ✏
 
 A Company that has a Lottery show is planning to expand and needs a web application that will bring similar experience to a wide range of users online. Every person that thinks they have the lucky numbers can enter in numbers for the next draw. A person from the company initiates the draw, random numbers are drawn and the numbers that the people submitted until that point in time are checked if they are a winning combination. Winners should be added in a separate board where they can be accessed by anyone. All of these functionalities need to be accessible by any device so that the players can play on a different variety of devices. 
