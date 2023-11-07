@@ -15,27 +15,86 @@ namespace SEDC.NotesApp.DataAccess.DapperImplementations
 
         public void Add(Note entity)
         {
-            throw new NotImplementedException();
+            using (SqlConnection sqlConnection = new SqlConnection(_connectionString))
+            {
+                sqlConnection.Open();
+
+                string insertQuery = "INSERT INTO dbo.Notes(Text, Priority, Tag, UserId) " +
+                    "                 VALUES(@text, @priority, @tag, @userId)";
+
+                sqlConnection.Query(insertQuery, 
+                    new
+                    {
+                        text = entity.Text,
+                        priority = entity.Priority,
+                        tag = entity.Tag,
+                        userId = entity.UserId,
+                    });
+            }
         }
 
         public void Delete(Note entity)
         {
-            throw new NotImplementedException();
+            using (SqlConnection sqlConnection = new SqlConnection(_connectionString))
+            {
+                sqlConnection.Open();
+
+                string deleteQuery = "DELETE FROM dbo.Notes WHERE Id = @id";
+                sqlConnection.Execute(deleteQuery, new { id = entity.Id });
+            }
         }
 
         public List<Note> GetAll()
         {
-            throw new NotImplementedException();
+            //SqlConnection sqlConnection = new SqlConnection(_connectionString);
+            //sqlConnection.Open();
+            using (SqlConnection sqlConnection = new SqlConnection(_connectionString))
+            {
+                sqlConnection.Open();
+
+                List<Note> notesDb = sqlConnection.Query<Note>("SELECT * FROM dbo.Notes").ToList();
+                return notesDb;
+            }
+
+            //sqlConnection.Close();
         }
 
         public Note GetById(int id)
         {
-            throw new NotImplementedException();
+            using (SqlConnection sqlConnection = new SqlConnection(_connectionString))
+            {
+                sqlConnection.Open();
+
+                Note noteDb = sqlConnection
+                    .Query<Note>("SELECT * FROM dbo.Notes WHERE Id = @NoteId", new { NoteId = id })
+                    .FirstOrDefault();
+
+                //User userDB = sqlConnection
+                //    .Query<User>("SELECT * FROM Users")
+                //    .FirstOrDefault();
+
+                return noteDb;
+            }
         }
 
         public void Update(Note entity)
         {
-            throw new NotImplementedException();
+            using (SqlConnection sqlConnection = new SqlConnection(_connectionString))
+            {
+                sqlConnection.Open();
+
+                string updateQuery = "UPDATE dbo.Notes SET Text = @text, Tag = @tag, Priority = @priority, UserId = @userId" +
+                    " WHERE Id = @id";
+
+                sqlConnection.Query(updateQuery, new
+                {
+                    text = entity.Text,
+                    priority = entity.Priority,
+                    tag = entity.Tag,
+                    userId = entity.UserId,
+                    id = entity.Id
+                });
+            }
         }
     }
 }

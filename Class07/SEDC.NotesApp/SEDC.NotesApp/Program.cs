@@ -19,7 +19,7 @@ builder.Services.AddDbContext<NotesAppDbContext>(x =>
 
 builder.Services.AddTransient<IRepository<Note>, NoteRepository>();
 builder.Services.AddTransient<IRepository<User>, UserRepository>();
-builder.Services.AddTransient<INoteService, NoteService>();
+builder.Services.AddTransient<INoteService, FakeNoteService>();
 
 var app = builder.Build();
 

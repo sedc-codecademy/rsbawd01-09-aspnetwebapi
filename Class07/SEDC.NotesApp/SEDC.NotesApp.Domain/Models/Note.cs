@@ -1,6 +1,7 @@
 ﻿using SEDC.NotesApp.Domain.Enums;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Security.Principal;
 
 namespace SEDC.NotesApp.Domain.Models
 {
@@ -14,5 +15,6 @@ namespace SEDC.NotesApp.Domain.Models
         public Tag Tag { get; set; }
         public int UserId { get; set; }
         public User User { get; set; }
+
     }
 }

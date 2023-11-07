@@ -33,9 +33,10 @@ namespace SEDC.NotesApp.DataAccess.Implementations
 
         public Note GetById(int id)
         {
-            return _notesAppDbContext.Notes
+            Note response = _notesAppDbContext.Notes
                 .Include(x => x.User)
                 .FirstOrDefault(x => x.Id == id);
+            return response;
         }
 
         public void Update(Note entity)

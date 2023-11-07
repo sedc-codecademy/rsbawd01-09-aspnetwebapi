@@ -4,7 +4,7 @@
 
 namespace SEDC.NotesApp.DataAccess.Migrations
 {
-    public partial class TestMig : Migration
+    public partial class InitMigrationFirstRun : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
