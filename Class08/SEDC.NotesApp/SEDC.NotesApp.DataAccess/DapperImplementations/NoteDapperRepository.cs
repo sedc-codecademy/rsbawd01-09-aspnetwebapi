@@ -52,7 +52,10 @@ namespace SEDC.NotesApp.DataAccess.DapperImplementations
             {
                 sqlConnection.Open();
 
-                List<Note> notesDb = sqlConnection.Query<Note>("SELECT * FROM dbo.Notes").ToList();
+                List<Note> notesDb = sqlConnection
+                    .Query<Note>("SELECT * FROM dbo.Notes")
+                    .ToList();
+
                 return notesDb;
             }
 

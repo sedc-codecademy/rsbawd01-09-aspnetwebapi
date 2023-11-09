@@ -15,14 +15,10 @@ namespace SEDC.NotesApp.Services.Implementations
     public class UserService : IUserService
     {
         private IUserRepository _userRepository;
-        //private IOptions<AppSettings> _options;
 
-        public UserService(IUserRepository userRepository)//, IOptions<AppSettings> options)
+        public UserService(IUserRepository userRepository)
         {
             _userRepository = userRepository;
-            //_options = options;
-
-            //_options.Value.SecretKey;
         }
 
         public string LoginUser(LoginUserDto loginDto)
@@ -41,16 +37,14 @@ namespace SEDC.NotesApp.Services.Implementations
 
             //get the bytes of the hash string 5467821 -> 2363621
             byte[] hashBytes = mD5CryptoServiceProvider.ComputeHash(passwordBytes);
-
             //get the hash as string 2363621 -> q654klj
             string hash = Encoding.ASCII.GetString(hashBytes);
 
             //try to get the user
             User userDb = _userRepository.LoginUser(loginDto.UserName, hash);
+           
             if(userDb == null)
-            {
                 throw new UserNotFoundException("User not found");
-            }
 
             //GENERATE JWT TOKEN
             JwtSecurityTokenHandler jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
@@ -58,19 +52,20 @@ namespace SEDC.NotesApp.Services.Implementations
 
             SecurityTokenDescriptor securityTokenDescriptor = new SecurityTokenDescriptor
             {
-                Expires = DateTime.UtcNow.AddHours(1), // the token will be valid for one hour
+                Expires = DateTime.UtcNow.AddMinutes(10), // the token will be valid for one hour
                 //signature configuration
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(secretKeyBytes),
                     SecurityAlgorithms.HmacSha256Signature),
                 //payload
                 Subject = new ClaimsIdentity(
                     new[]
-                   {
+                    {
                         new Claim(ClaimTypes.Name, userDb.Username),
-                        new Claim("userFullName", $"{userDb.FirstName} {userDb.LastName}")
+                        new Claim("userFullName", $"{userDb.FirstName} {userDb.LastName}"),
+                        new Claim("IsAdministrator", "True"),
+                        new Claim("CanAccessBankInfo", "True")
                         //new Claim("role", userDb.Role)
-                    }
-                )
+                    })
             };
 
             //generate token
@@ -103,7 +98,7 @@ namespace SEDC.NotesApp.Services.Implementations
                 FirstName = registerUserDto.FirstName,
                 LastName = registerUserDto.LastName,
                 Username = registerUserDto.Username,
-                Password = hash
+                Password = hash // 01b1a63548e800a2a0dcda422fd94e37 
             };
             _userRepository.Add(user);
         }

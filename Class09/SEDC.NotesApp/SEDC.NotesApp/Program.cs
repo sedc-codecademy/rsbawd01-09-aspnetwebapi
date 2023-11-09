@@ -19,7 +19,7 @@ builder.Services.Configure<AppSettings>(appSettings);
 AppSettings appSettingsObject = appSettings.Get<AppSettings>();
 
 //DEPENDENCY INJECTION
-DependencyInjectionHelper.InjectDbContext(builder.Services, appSettingsObject.ConnectionString);
+DependencyInjectionHelper.InjectDbContext(builder.Services, "CONNECTION_STRING___NotesAppAuthDb");
 DependencyInjectionHelper.InjectRepositories(builder.Services);
 //DependencyInjectionHelper.InjectAdoRepositories(builder.Services, "Server=.;Database=NotesAppDb;Trusted_Connection=True");
 //DependencyInjectionHelper.InjectDapperRepositories(builder.Services, appSettingsObject.ConnectionString);
@@ -31,23 +31,24 @@ builder.Services.AddAuthentication(x =>
     //we will use JWT authentication
     x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-})
-    .AddJwtBearer(x =>
+}).AddJwtBearer(x =>
+{
+    x.RequireHttpsMetadata = false;
+    //we expect the token into the HttpContext
+    
+    x.SaveToken = true;
+
+    //how to validate token
+    x.TokenValidationParameters = new TokenValidationParameters
     {
-        x.RequireHttpsMetadata = false;
-        //we expect the token into the HttpContext
-        x.SaveToken = true;
-        //how to validate token
-        x.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateAudience = false,
-            ValidateIssuer = false,
-            ValidateIssuerSigningKey = true,
-            //the secret key
-            //IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(appSettingsObject.SecretKey))
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("Our very secret secret key"))
-        };
-    });
+        ValidateAudience = false,
+        ValidateIssuer = false,
+        ValidateIssuerSigningKey = true,
+        //the secret key
+        //IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(appSettingsObject.SecretKey))
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes("Our very secret secret key"))
+    };
+});
 
 var app = builder.Build();
 

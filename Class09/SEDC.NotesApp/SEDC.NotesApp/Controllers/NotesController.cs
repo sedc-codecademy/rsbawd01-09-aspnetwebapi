@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using SEDC.NotesApp.Dtos;
 using SEDC.NotesApp.Services.Interfaces;
 using SEDC.NotesApp.Shared.CustomExceptions;
+using System.Security.Claims;
 
 namespace SEDC.NotesApp.Controllers
 {
@@ -24,8 +25,8 @@ namespace SEDC.NotesApp.Controllers
         {
             try
             {
-
                 //get username from token (Name Claim)
+                string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
                 //get the role claim from token 
                 return Ok(_noteService.GetAllNotes());

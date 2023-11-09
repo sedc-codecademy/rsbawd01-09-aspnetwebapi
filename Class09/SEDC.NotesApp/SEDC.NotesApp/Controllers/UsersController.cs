@@ -38,6 +38,7 @@ namespace SEDC.NotesApp.Controllers
             }
         }
 
+
         [AllowAnonymous] //no token needed (we can not be logged in before login)
         [HttpPost("login")]
         public IActionResult LoginUser([FromBody] LoginUserDto loginDto)
