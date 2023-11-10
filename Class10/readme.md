@@ -1,6 +1,6 @@
-# Exercise 1: Implementing CRUD Operations in the `NoteRepository`
+# Exercise 1: Implementing CRUD Operations in the `Movie App`
 
-In this exercise, you will work with the `NoteRepository` class, which is responsible for performing CRUD (Create, Read, Update, Delete) operations on notes in the NotesApp database. Your task is to implement the existing methods to make the repository fully functional.
+In this exercise, you will work with the `MovieRepository`, Service and Controller class, which is responsible for performing CRUD (Create, Read, Update, Delete) operations on notes in the MoviesApp database. Your task is to implement the existing methods to make the repository and other components fully functional.
 
 ## First steps:
 
@@ -14,146 +14,169 @@ In this exercise, you will work with the `NoteRepository` class, which is respon
    Using Entity Framework, create a migration to represent changes in your data model. Use the following command: **add-migration YourMigrationName**
 
 3. **Update the Database:**
+    
+    Apply the migration to update the database schema with the following command: **update-database**
 
-Apply the migration to update the database schema with the following command: **update-database**
+# Exercise: Implementing Movie Repository Methods
 
-
-## Instructions:
-
-1. **Implement the `Add` method:**
-
-   The `Add` method is used to add a new note to the database. Implement this method by adding the provided note entity to the `_notesAppDbContext` and saving the changes to the database using the `SaveChanges` method.
-
-2. **Implement the `Delete` method:**
-
-   The `Delete` method should delete the given note entity from the database. You need to remove the entity from the `_notesAppDbContext` and then call `SaveChanges` to persist the changes.
-
-3. **Implement the `GetAll` method:**
-
-   The `GetAll` method should return a list of all notes in the database. Ensure that you join the `Notes` table with the `Users` table using the `Include` method. Return the list of notes.
-
-4. **Implement the `GetById` method:**
-
-   The `GetById` method should retrieve a note by its unique identifier (id). Join the `Notes` table with the `Users` table using `Include` and return the first note where the id matches the provided parameter.
-
-5. **Implement the `Update` method:**
-
-   The `Update` method is used to update an existing note in the database. Implement this method by updating the provided note entity within the `_notesAppDbContext` and then call `SaveChanges` to persist the changes.
-
-# Exercise 2: Implementing Note Service Methods
-
-In this exercise, you will implement the `AddNote`, `GetAllNotes`, and `GetById` methods in the `NoteService` class. The `NoteService` is responsible for managing notes in the NotesApp application.
-
-## Instructions:
-
-1. **Implement the `AddNote` Method:**
-
-   - Open the `NoteService` class.
-   - Locate the `AddNote` method. This method is responsible for adding a new note to the database.
-   - Implement the method to perform the following tasks:
-     - Validate the `addNoteDto` input.
-     - Check if the user with the specified `UserId` exists.
-     - Ensure that the `Text` field is not empty and does not exceed 100 characters.
-     - Map the `addNoteDto` to a `Note` domain model.
-     - Add the new note to the database using the `_noteRepository`.
-
-2. **Implement the `GetAllNotes` Method:**
-
-   - Locate the `GetAllNotes` method in the `NoteService` class. This method retrieves a list of all notes from the database.
-   - Implement the method to perform the following tasks:
-     - Retrieve all notes from the database using the `_noteRepository`.
-     - Map the retrieved `Note` objects to `NoteDto` objects.
-     - Return a list of `NoteDto` objects.
-
-3. **Implement the `GetById` Method:**
-
-   - Find the `GetById` method in the `NoteService` class. This method retrieves a note by its unique identifier (id).
-   - Implement the method to perform the following tasks:
-     - Retrieve the note with the specified `id` from the database using the `_noteRepository`.
-     - Check if the note exists, and if not, throw a `NoteNotFoundException`.
-     - Map the retrieved `Note` object to a `NoteDto` object.
-     - Return the `NoteDto`.
-
-## Note:
-
-- Pay attention to input validation and error handling to ensure the methods handle various scenarios correctly.
-
-By completing this exercise, you will have implemented essential functionality in the `NoteService` for adding, retrieving all notes, and retrieving notes by their unique identifiers.
-
-# Exercise 3: Implementing Controller Actions in ASP.NET Core
-
-In this exercise, you will implement controller actions in an ASP.NET Core application by calling methods from the service layer. The controller is responsible for handling HTTP requests and returning appropriate responses.
-
-## Scenario:
-
-You are working on a NotesApp project, and you need to implement controller actions for managing notes. The `NotesController` interacts with the `INoteService` to perform CRUD operations on notes.
-
-## Instructions:
-
-1. **Implement the `Get` Action:**
-
-   - Open the `NotesController` class.
-   - Locate the `Get` action, which handles HTTP GET requests to retrieve all notes.
-   - Implement the action by calling the `GetAllNotes` method from the `_noteService`.
-   - Return an HTTP 200 status code with the list of `NoteDto` objects as the response.
-
-2. **Implement the `GetById` Action:**
-
-   - Find the `GetById` action in the `NotesController`. This action handles HTTP GET requests to retrieve a single note by its `id`.
-   - Implement the action by calling the `GetById` method from the `_noteService`.
-   - Handle potential exceptions, such as `NoteNotFoundException`, and return the appropriate status codes with error messages.
-
-3. **Implement the `AddNote` Action:**
-
-   - Locate the `AddNote` action, which handles HTTP POST requests to add a new note.
-   - Implement the action by calling the `AddNote` method from the `_noteService` with the provided data from the request body.
-   - Handle potential exceptions, such as `NoteDataException`, and return the appropriate status codes with error messages.
-
-4. **Implement the `UpdateNote` Action:**
-
-   - Find the `UpdateNote` action in the `NotesController`. This action handles HTTP PUT requests to update an existing note.
-   - Implement the action by calling the `UpdateNote` method from the `_noteService` with the provided data from the request body.
-   - Handle potential exceptions, such as `NoteNotFoundException` and `NoteDataException`, and return the appropriate status codes with error messages.
-
-5. **Implement the `DeleteNote` Action:**
-
-   - Locate the `DeleteNote` action, which handles HTTP DELETE requests to delete a note by its `id`.
-   - Implement the action by calling the `DeleteNote` method from the `_noteService`.
-   - Handle potential exceptions, such as `NoteNotFoundException`, and return the appropriate status codes with success or error messages.
-
-6. Test each of the implemented actions to ensure they work as expected by using tools like Postman or Swagger.
-
-## Note:
-
-- Pay attention to error handling and return the correct status codes and messages based on the outcomes of the service layer methods.
-
-By completing this exercise, you will have implemented controller actions for managing notes in the NotesApp application by calling methods from the service layer.
-
-# ----- Homework Assignment: Implementing User Management
-
-In this homework assignment, you will implement the User management feature in an ASP.NET Core application. This feature includes creating a User controller, a User service, and a User repository to handle user-related operations.
+In this exercise, you will implement various methods in the `MovieRepository` class, responsible for interacting with the MoviesDbContext to perform CRUD operations on movie data.
 
 ## Task:
 
-Your goal is to create the necessary components to manage users, including creating, retrieving, updating, and deleting user data.
+Your goal is to complete the implementation of the methods in the `MovieRepository` class. Follow the instructions for each method to ensure accurate and functional behavior.
 
-**1. Implement the User Repository:**
+**1. Implement the `Add` Method:**
 
-   - Create a `UserRepository` class that implements the necessary methods to perform CRUD operations for users. This should include methods to add, retrieve, update, and delete user data. The user repository should interact with the database using Entity Framework or any other preferred database access technology.
+   - Open the `MovieRepository` class.
+   - Find the `Add` method, which adds a new movie to the database.
+   - Implement the method to add the provided movie entity to the `_context.Movies` and save the changes to the database using `_context.SaveChanges()`.
 
-**2. Implement the User Service:**
+**2. Implement the `Delete` Method:**
 
-   - Create a `UserService` class that interacts with the `UserRepository`. The service should provide methods for adding, retrieving, updating, and deleting users. It should also include any necessary business logic, validation, and error handling related to user operations.
+   - Locate the `Delete` method in the `MovieRepository`.
+   - Implement the method to remove the specified movie entity from the `_context.Movies` and save the changes to the database.
 
-**3. Implement the User Controller:**
+**3. Implement the `FilterMovies` Method:**
 
-   - Create a `UserController` that handles HTTP requests related to users. Implement actions for creating new users, retrieving user information by ID, updating user details, and deleting users. The controller should call the corresponding methods from the `UserService` to perform these operations.
+   - Find the `FilterMovies` method in the `MovieRepository`. This method filters movies based on the provided year and genre.
+   - Implement the method to return a list of movies based on the following conditions:
+      - If both `year` and `genre` are null, return all movies.
+      - If only `year` is null, return movies filtered by genre.
+      - If only `genre` is null, return movies filtered by year.
+      - If both `year` and `genre` are provided, return movies filtered by both.
 
-**4. Test the User Management Feature:**
+**4. Implement the `GetAll` Method:**
 
-   - Create test cases to ensure the functionality of the User management feature. Test each of the controller actions by sending HTTP requests (POST, GET, PUT, DELETE) using a tool like Postman. Verify that user data can be created, retrieved, updated, and deleted accurately, and look into database to see the data.
-   
-**5. Send github url to Zoka :)**
+   - Find the `GetAll` method in the `MovieRepository`. This method retrieves all movies from the database.
+   - Implement the method to return all movies in the `_context.Movies`.
 
-**&. Enjoy the weekend days**
+**5. Implement the `GetById` Method:**
 
+   - Locate the `GetById` method in the `MovieRepository`. This method retrieves a movie by its unique identifier (id).
+   - Implement the method to return the movie from `_context.Movies` where the id matches the provided parameter.
+
+**6. Implement the `Update` Method:**
+
+   - Find the `Update` method in the `MovieRepository`. This method updates an existing movie in the database.
+   - Implement the method to update the provided movie entity within the `_context.Movies` and save the changes to the database.
+
+## Note:
+
+- Ensure that you handle exceptions and potential errors that may occur during database operations.
+- Test each of the implemented methods to verify their correctness and functionality.
+
+By completing this exercise, you will gain hands-on experience in implementing CRUD operations in the `MovieRepository` class, reinforcing your understanding of database interactions in ASP.NET Core applications.
+
+# Exercise: Implementing Movie Service Methods
+
+In this exercise, you will implement various methods in the `MovieService` class, which is responsible for handling business logic related to movies. The service interacts with the `IMovieRepository` to perform operations on movie data.
+
+## Task:
+
+Your goal is to complete the implementation of the methods in the `MovieService` class. Follow the instructions for each method to ensure accurate and functional behavior.
+
+**1. Implement the `AddMovie` Method:**
+
+   - Open the `MovieService` class.
+   - Locate the `AddMovie` method, which adds a new movie to the database.
+   - Implement the method to perform the following tasks:
+      - Validate that the `Title` is not empty.
+      - Validate that the `Year` is greater than 0.
+      - Validate that the `Description` (if provided) does not exceed 250 characters.
+      - Convert the `AddMovieDto` to a `Movie` entity.
+      - Call the corresponding method in the `_movieRepository` to add the new movie to the database.
+
+**2. Implement the `DeleteMovie` Method:**
+
+   - Find the `DeleteMovie` method in the `MovieService`.
+   - Implement the method to delete a movie by its unique identifier (`id`) from the database.
+   - Validate if the movie with the specified `id` exists in the database using `_movieRepository.GetById(id)`.
+   - Call the corresponding method in the `_movieRepository` to delete the movie.
+
+**3. Implement the `FilterMovies` Method:**
+
+   - Locate the `FilterMovies` method in the `MovieService`. This method filters movies based on the provided `year` and `genre`.
+   - Implement the method to perform the following tasks:
+      - If `genre` is provided, validate if the value is a valid genre.
+      - Call the corresponding method in the `_movieRepository` to filter movies by `year` and `genre`.
+      - Convert the filtered movies to a list of `MovieDto` using the provided extension methods.
+
+**4. Implement the `GetAllMovies` Method:**
+
+   - Find the `GetAllMovies` method in the `MovieService`. This method retrieves all movies from the database.
+   - Implement the method to call the corresponding method in the `_movieRepository` to get all movies and convert them to a list of `MovieDto`.
+
+**5. Implement the `GetMovieById` Method:**
+
+   - Locate the `GetMovieById` method in the `MovieService`. This method retrieves a movie by its unique identifier (`id`).
+   - Implement the method to validate if the movie with the specified `id` exists in the database.
+   - Call the corresponding method in the `_movieRepository` to get the movie by `id` and convert it to a `MovieDto`.
+
+**6. Implement the `UpdateMovie` Method:**
+
+   - Find the `UpdateMovie` method in the `MovieService`. This method updates an existing movie in the database.
+   - Implement the method to perform the following tasks:
+      - Validate that the `Title` is not empty.
+      - Validate that the `Year` is greater than 0.
+      - Validate that the `Description` (if provided) does not exceed 250 characters.
+      - Call the corresponding method in the `_movieRepository` to update the existing movie.
+
+## Note:
+
+- Ensure that you handle exceptions and potential errors that may occur during movie operations.
+- Test each of the implemented methods to verify their correctness and functionality.
+
+By completing this exercise, you will gain hands-on experience in implementing business logic for movie operations in the `MovieService` class, reinforcing your understanding of the service layer in ASP.NET Core applications.
+
+
+# Exercise: Implementing Movie Controller Actions
+
+In this exercise, you will implement various actions in the `MoviesController` class, responsible for handling HTTP requests related to movies. The controller interacts with the `IMovieService` to perform operations on movie data.
+
+## Task:
+
+Your goal is to complete the implementation of the actions in the `MoviesController` class. Follow the instructions for each action to ensure accurate and functional behavior.
+
+**1. Implement the `Get` Action:**
+
+   - Open the `MoviesController` class.
+   - Locate the `Get` action, which retrieves all movies.
+   - Implement the action to call the corresponding method in the `_movieService` to get all movies.
+   - Handle exceptions and return appropriate status codes and messages.
+
+**2. Implement the `Filter` Action:**
+
+   - Find the `Filter` action in the `MoviesController`. This action filters movies based on the provided `year` and `genre`.
+   - Implement the action to call the corresponding method in the `_movieService` to filter movies by `year` and `genre`.
+   - Handle exceptions and return appropriate status codes and messages.
+
+**3. Implement the `GetById` Action:**
+
+   - Locate the `GetById` action in the `MoviesController`. This action retrieves a movie by its unique identifier (`id`).
+   - Implement the action to call the corresponding method in the `_movieService` to get the movie by `id`.
+   - Handle exceptions and return appropriate status codes and messages.
+
+**4. Implement the `UpdateMovie` Action:**
+
+   - Find the `UpdateMovie` action in the `MoviesController`. This action updates an existing movie.
+   - Implement the action to call the corresponding method in the `_movieService` to update the existing movie.
+   - Handle exceptions and return appropriate status codes and messages.
+
+**5. Implement the `Delete` Action:**
+
+   - Locate the `Delete` action in the `MoviesController`. This action deletes a movie by its unique identifier (`id`).
+   - Implement the action to call the corresponding method in the `_movieService` to delete the movie.
+   - Handle exceptions and return appropriate status codes and messages.
+
+**6. Implement the `AddMovie` Action:**
+
+   - Find the `AddMovie` action in the `MoviesController`. This action adds a new movie.
+   - Implement the action to call the corresponding method in the `_movieService` to add the new movie.
+   - Handle exceptions and return appropriate status codes and messages.
+
+## Note:
+
+- Ensure that you handle exceptions and potential errors that may occur during movie operations.
+- Test each of the implemented actions using tools like Postman or Swagger to verify their correctness and functionality.
+
+By completing this exercise, you will gain hands-on experience in implementing controller actions for movie operations in an ASP.NET Core application.
