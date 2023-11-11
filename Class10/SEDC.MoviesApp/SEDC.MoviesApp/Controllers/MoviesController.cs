@@ -21,37 +21,129 @@ namespace SEDC.MoviesApp.Controllers
         [HttpGet] //api/movies
         public ActionResult<List<MovieDto>> Get()
         {
-            throw new NotImplementedException();
+            try
+            {
+                return Ok(_movieService.GetAllMovies());
+            }
+            catch (MovieException e)
+            {
+                //log
+                return BadRequest(e.Message);
+            }
+            catch (Exception e)
+            {
+                //log
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred, contact the admin");
+            }
         }
 
         [HttpGet("filter")]
         public ActionResult<List<MovieDto>> Filter(int year, GenreEnum? genre)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return Ok(_movieService.FilterMovies(year, genre));
+            }
+            catch (MovieException e)
+            {
+                //log
+                return BadRequest(e.Message);
+            }
+            catch (Exception e)
+            {
+                //log
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred, contact the admin");
+            }
         }
 
         [HttpGet("{id}")] //api/movies/2
         public ActionResult<MovieDto> GetById(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return Ok(_movieService.GetMovieById(id));
+            }
+            catch (MovieNotFoundException e)
+            {
+                //log
+                return NotFound(e.Message);
+            }
+            catch (MovieException e)
+            {
+                //log
+                return BadRequest(e.Message);
+            }
+            catch (Exception e)
+            {
+                //log
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred, contact the admin");
+            }
         }
 
         [HttpPut]
         public IActionResult UpdateMovie([FromBody] UpdateMovieDto movie)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _movieService.UpdateMovie(movie);
+                return StatusCode(StatusCodes.Status204NoContent, "Note updated!");
+            }
+            catch (MovieException e)
+            {
+                //log
+                return BadRequest(e.Message);
+            }
+            catch (Exception e)
+            {
+                //log
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred, contact the admin");
+            }
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _movieService.DeleteMovie(id);
+
+                return StatusCode(StatusCodes.Status204NoContent, "Deleted resource");
+            }
+            catch (MovieNotFoundException e)
+            {
+                //log
+                return NotFound(e.Message);
+            }
+            catch (MovieException e)
+            {
+                //log
+                return BadRequest(e.Message);
+            }
+            catch (Exception e)
+            {
+                //log
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred, contact the admin");
+            }
         }
 
         [HttpPost("addMovie")]
         public IActionResult AddMovie([FromBody] AddMovieDto movieDto)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _movieService.AddMovie(movieDto);
+                return StatusCode(StatusCodes.Status201Created);
+            }
+            catch (MovieException e)
+            {
+                //log
+                return BadRequest(e.Message);
+            }
+            catch (Exception e)
+            {
+                //log
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred, contact the admin");
+            }
         }
     }
 }

@@ -1,8 +1,5 @@
 ﻿using SEDC.MoviesApp.Domain;
 using SEDC.MoviesApp.Shared;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace SEDC.MoviesApp.DataAccess
 {
@@ -16,51 +13,55 @@ namespace SEDC.MoviesApp.DataAccess
 
         public void Add(Movie entity)
         {
-            // Implement the logic to add a movie to the database
-            // ...
-
-            throw new NotImplementedException();
+            _context.Movies.Add(entity);
+            _context.SaveChanges();
         }
 
         public void Delete(Movie entity)
         {
-            // Implement the logic to delete a movie from the database
-            // ...
-
-            throw new NotImplementedException();
+            _context.Movies.Remove(entity);
+            _context.SaveChanges();
         }
 
         public List<Movie> FilterMovies(int? year, GenreEnum? genre)
         {
-            // Implement the logic to filter movies based on year and genre
-            // ...
+            if (genre == null && year == null)
+                return _context.Movies.ToList();
 
-            throw new NotImplementedException();
+            if (year == null)
+            {
+                List<Movie> moviesDb = _context.Movies.Where(x => x.Genre == (GenreEnum)genre).ToList();
+                return moviesDb;
+            }
+
+            if (genre == null)
+            {
+                List<Movie> moviesDb = _context.Movies.Where(x => x.Year == year).ToList();
+                return moviesDb;
+            }
+
+            List<Movie> movies = _context.Movies
+                .Where(x => x.Year == year)
+                .Where(x => x.Genre == (GenreEnum)genre)
+                .ToList();
+            
+            return movies;
         }
 
         public IEnumerable<Movie> GetAll()
         {
-            // Implement the logic to retrieve all movies from the database
-            // ...
-
-            // Placeholder for NotImplementedException
-            throw new NotImplementedException();
+            return _context.Movies;
         }
 
         public Movie GetById(int id)
         {
-            // Implement the logic to retrieve a movie by its ID
-            // ...
-
-            throw new NotImplementedException();
+            return _context.Movies.SingleOrDefault(x => x.Id == id);
         }
 
         public void Update(Movie update)
         {
-            // Implement the logic to update a movie in the database
-            // ...
-
-            throw new NotImplementedException();
+            _context.Movies.Update(update);
+            _context.SaveChanges();
         }
     }
 }
