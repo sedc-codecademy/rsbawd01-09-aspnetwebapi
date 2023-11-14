@@ -22,14 +22,44 @@ namespace SEDC.MoviesApp.Controllers
         [HttpPost("authenticate")]
         public IActionResult Authenticate([FromBody] LoginModelDto model)
         {
-           throw new NotImplementedException();
+            try
+            {
+                UserDto user = _userService.Authenticate(model);
+
+                if (user == null)
+                    return NotFound("Username or Password is incorrect!");
+
+                return Ok(user);
+            }
+            catch (UserException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred!");
+            }
         }
 
         [AllowAnonymous]
         [HttpPost("register")]
         public IActionResult Register([FromBody] RegisterModelDto model)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _userService.Register(model);
+
+                return Ok(new ResponseDto() { success = "Successfully registered user!" });
+                // return Ok("Successfully registered user!");
+            }
+            catch (UserException ex)
+            {
+                return BadRequest(new ResponseDto() { error = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred!");
+            }
         }
     }
 }

@@ -24,20 +24,64 @@ namespace SEDC.MoviesApp.Controllers
         [HttpGet] //api/movies
         public ActionResult<List<MovieDto>> Get()
         {
-            throw new NotImplementedException();
+            try
+            {
+                var userId = GetAuthorizedUserId();
+                return Ok(_movieService.GetAllMovies(userId));
+            }
+            catch (MovieException e)
+            {
+                //log
+                return BadRequest(e.Message);
+            }
+            catch (Exception e)
+            {
+                //log
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred, contact the admin");
+            }
         }
-
         [Authorize]
         [HttpGet("filter")]
         public ActionResult<List<MovieDto>> Filter(int year, GenreEnum? genre)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return Ok(_movieService.FilterMovies(year, genre));
+            }
+            catch (MovieException e)
+            {
+                //log
+                return BadRequest(e.Message);
+            }
+            catch (Exception e)
+            {
+                //log
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred, contact the admin");
+            }
         }
 
         [HttpGet("{id}")] //api/movies/2
         public ActionResult<MovieDto> GetById(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return Ok(_movieService.GetMovieById(id));
+            }
+            catch (MovieNotFoundException e)
+            {
+                //log
+                return NotFound(e.Message);
+            }
+            catch (MovieException e)
+            {
+                //log
+                return BadRequest(e.Message);
+            }
+            catch (Exception e)
+            {
+                //log
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occurred, contact the admin");
+            }
         }
 
         [HttpPut]
@@ -92,10 +136,8 @@ namespace SEDC.MoviesApp.Controllers
         {
             try
             {
-                int userId = GetAuthorizedUserId();
-
+                var userId = GetAuthorizedUserId();
                 _movieService.AddMovie(movieDto, userId);
-
                 return StatusCode(StatusCodes.Status201Created);
             }
             catch (MovieException e)
@@ -112,15 +154,14 @@ namespace SEDC.MoviesApp.Controllers
 
         private int GetAuthorizedUserId()
         {
-            if (int.TryParse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value, out var userId))
+            if (!int.TryParse(User.FindFirst(ClaimTypes.NameIdentifier)?
+                .Value, out var userId))
             {
-                return userId;
+                string name = User.FindFirst(ClaimTypes.Name)?.Value;
+                throw new UserException(userId, name,
+                    "Name identifier claim does not exist!");
             }
-
-            string name = User.FindFirst(ClaimTypes.Name)?.Value;
-            
-            throw new UserException(userId, name,
-                "Name identifier claim does not exist!");
+            return userId;
         }
     }
 }

@@ -31,12 +31,15 @@ namespace SEDC.MoviesApp.Services.Implementations
         public UserDto Authenticate(LoginModelDto model)
         {
             MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
+
             byte[] md5data = md5.ComputeHash(Encoding.ASCII.GetBytes(model.Password));
             string hashedPassword = Encoding.ASCII.GetString(md5data);
             
             User? user = _userRepository
                 .GetAll()
-                .SingleOrDefault(x => x.Username == model.Username && x.Password == hashedPassword);
+                .Where(x => x.Username == model.Username)
+                .Where(x => x.Password == hashedPassword)
+                .FirstOrDefault();
             
             if (user == null) 
                 return null;
@@ -51,12 +54,14 @@ namespace SEDC.MoviesApp.Services.Implementations
                     {
                         new Claim(ClaimTypes.Name, $"{user.FirstName} {user.LastName}"),
                         new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+
+                        new Claim("IsAdmin", "True"),
+                        new Claim("CanAccessPayments", "False")
                     }),
 
                 Expires = DateTime.UtcNow.AddDays(7),
                
-                SigningCredentials = new SigningCredentials(
-                        new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
 
             SecurityToken token = tokenHandler.CreateToken(tokenDescriptor);
@@ -67,8 +72,9 @@ namespace SEDC.MoviesApp.Services.Implementations
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 Username = user.Username,
+                MovieList = user.MovieList.Select(movie => movie.ToMovieDto()).ToList(),
+
                 Token = tokenHandler.WriteToken(token),
-                MovieList = user.MovieList.Select(movie => movie.ToMovieDto()).ToList()
             };
 
             return userModel;
@@ -78,21 +84,21 @@ namespace SEDC.MoviesApp.Services.Implementations
         {
             // Validations
             if (string.IsNullOrEmpty(model.FirstName))
-                throw new UserException(null, model.Username,
-                    "First name is required");
+                throw new UserException(null, model.Username, "First name is required");
+
             if (string.IsNullOrEmpty(model.LastName))
-                throw new UserException(null, model.Username,
-                    "Last name is required");
-            if (!ValidUsername(model.Username))
-                throw new UserException(null, model.Username,
-                    "Username is already in use");
+                throw new UserException(null, model.Username, "Last name is required");
+
+            if (ValidUsername(model.Username) == false)
+                throw new UserException(null, model.Username, "Username is already in use");
+
             if (model.Password != model.ConfirmPassword)
-                throw new UserException(null, model.Username,
-                    "Passwords did not match!");
+                throw new UserException(null, model.Username, "Passwords did not match!");
 
             MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
 
             byte[] md5data = md5.ComputeHash(Encoding.ASCII.GetBytes(model.Password));
+
             string hashedPassword = Encoding.ASCII.GetString(md5data);
 
             User user = new User()
@@ -108,7 +114,9 @@ namespace SEDC.MoviesApp.Services.Implementations
 
         private bool ValidUsername(string username)
         {
-            return _userRepository.GetAll().All(x => x.Username != username);
+            return _userRepository
+                .GetAll()
+                .All(x => x.Username != username);
         }
     }
 }

@@ -16,8 +16,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<MoviesDbContext>(x =>
-                x.UseSqlServer("Server=380-PC;Database=MoviesDbTest;Trusted_Connection=True"));
+builder.Services.AddDbContext<MoviesDbContext>(x => x.UseSqlServer("CONNECTION STRING"));
 
 builder.Services.AddTransient<IMovieRepository, MovieRepository>();
 builder.Services.AddTransient<IUserRepository, UserRepository>();
@@ -44,7 +43,6 @@ builder.Services.AddAuthentication(x =>
 }
 );
 
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -60,6 +58,7 @@ if (app.Environment.IsDevelopment())
         .AllowAnyHeader();
     });
 }
+
 app.UseAuthentication();
 app.UseAuthorization();
 
