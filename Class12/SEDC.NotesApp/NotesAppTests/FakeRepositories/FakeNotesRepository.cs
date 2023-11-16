@@ -1,16 +1,12 @@
 ﻿using SEDC.NotesApp.DataAccess;
 using SEDC.NotesApp.Domain.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NotesAppTests.FakeRepositories
 {
     public class FakeNotesRepository : IRepository<Note>
     {
         private List<Note> notes;
+
         public FakeNotesRepository()
         {
             notes = new List<Note>()

@@ -3,11 +3,11 @@
 namespace Unit_Testing_Tests
 {
     [TestClass]
-    public class RandomSeriveTest
+    public class RandomServiceTest
     {
-
         private readonly RandomService _randomService;
-        public RandomSeriveTest()
+
+        public RandomServiceTest()
         {
             _randomService = new RandomService();
         }
@@ -17,6 +17,7 @@ namespace Unit_Testing_Tests
         // Assert
 
         // MethodName_StateUnderTest_ExpectedBehavior
+
         // Sum_BothNumbersAreValid_PositiveResultNumber
         [TestMethod]
         public void Sum_BothNumbersAreValid_PositiveResultNumber()
@@ -25,8 +26,10 @@ namespace Unit_Testing_Tests
             int num1 = 10;
             int num2 = 20;
             int? expectedResult = 30;
+
             //Act
             int? result = _randomService.Sum(num1, num2);
+
             //Assert
             Assert.AreEqual(expectedResult, result);    
         }
@@ -51,8 +54,10 @@ namespace Unit_Testing_Tests
             //Arrange
             int num1 = 20;
             int num2 = 19;
+
             //Act
-            var result = _randomService.isFirstNumberLarger(num1, num2);
+            bool result = _randomService.IsFirstNumberLarger(num1, num2);
+
             //Assert
             Assert.IsTrue(result);
         }
@@ -72,8 +77,23 @@ namespace Unit_Testing_Tests
         {
             //Arange
             int num = 14;
+
             //Assert
             Assert.ThrowsException<ArgumentOutOfRangeException>(() => _randomService.GetDigitName(num));
+        }
+
+        [TestMethod]
+        public void GetDigitName_Pass5_Five()
+        {
+            //Arange
+            int num = 5;
+            string expectation = "Five";
+
+            // Act
+            string result = _randomService.GetDigitName(num);
+
+            //Assert
+            Assert.AreEqual(expectation, result);
         }
     }
 }

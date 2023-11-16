@@ -22,20 +22,16 @@ namespace SEDC.NotesApp.Services.Implementations
         {
             //1. validation
             User userDb = _userRepository.GetById(addNoteDto.UserId);
+            
             if(userDb == null)
-            {
                 throw new NoteDataException($"User with id {addNoteDto.UserId} does not exist");
-            }
 
             if (string.IsNullOrEmpty(addNoteDto.Text))
-            {
                 throw new NoteDataException("Text is required field");
-            }
+
             //Text is not null or empty
-            if(addNoteDto.Text.Length > 100)
-            {
+            if (addNoteDto.Text.Length > 100)
                 throw new NoteDataException("Text can not contain more than 100 characters");
-            }
 
             //2. map to domain model
             Note newNote = addNoteDto.ToNote();
@@ -65,10 +61,10 @@ namespace SEDC.NotesApp.Services.Implementations
         public NoteDto GetById(int id)
         {
             Note noteDb = _noteRepository.GetById(id);
+           
             if (noteDb == null)
-            {
                 throw new NoteNotFoundException($"Note with id {id} was not found!");
-            }
+            
             NoteDto noteDto = noteDb.ToNoteDto();
             return noteDto;
         }

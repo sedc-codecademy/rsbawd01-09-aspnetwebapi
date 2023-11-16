@@ -19,7 +19,8 @@ namespace NotesAppTests
         {
             // Arrange
             INoteService noteService = new NoteService(new FakeNotesRepository(), new FakeUserRepository());
-            var newNote = new AddNoteDto()
+
+            AddNoteDto newNote = new AddNoteDto()
             {
                 Priority = SEDC.NotesApp.Domain.Enums.Priority.Low,
                 Tag = SEDC.NotesApp.Domain.Enums.Tag.Work,
@@ -29,7 +30,6 @@ namespace NotesAppTests
 
             // Assert
             Assert.ThrowsException<NoteDataException>(() => noteService.AddNote(newNote));
-
         }
 
         [TestMethod]
@@ -37,6 +37,7 @@ namespace NotesAppTests
         {
             // Arrange
             INoteService noteService = new NoteService(new FakeNotesRepository(), new FakeUserRepository());
+
             var newNote = new AddNoteDto()
             {
                 Priority = SEDC.NotesApp.Domain.Enums.Priority.Low,
@@ -47,7 +48,6 @@ namespace NotesAppTests
 
             // Assert
             Assert.ThrowsException<NoteDataException>(() => noteService.AddNote(newNote));
-
         }
 
         [TestMethod]
@@ -65,9 +65,7 @@ namespace NotesAppTests
 
             // Assert
             Assert.ThrowsException<NoteDataException>(() => noteService.AddNote(newNote));
-
         }
-
 
         [TestMethod]
         public void GetAllNotes_Count()
@@ -85,7 +83,6 @@ namespace NotesAppTests
         {
             var noteService = new NoteService(new FakeNotesRepository(), new FakeUserRepository());
 
-
             Assert.ThrowsException<NoteNotFoundException>(() => noteService.GetById(3));
         }
 
@@ -98,7 +95,31 @@ namespace NotesAppTests
             var result = noteService.GetById(1);
 
             Assert.AreEqual(expectedNoteText, result.Text);
+        }
 
+        [TestMethod]
+        public void IsValidUsername_ValidUserName_True()
+        {
+            string testData = "zoka";
+
+            bool result = ValidUsername(testData);
+
+            Assert.IsTrue(result);
+        }
+
+        [TestMethod]
+        public void IsValidUsername_ExistingUserName_False()
+        {
+            string testData = "almir.vuk";
+
+            bool result = ValidUsername(testData);
+
+            Assert.IsFalse(result);
+        }
+
+        private bool ValidUsername(string username)
+        {
+            return false;
         }
     }
 }
