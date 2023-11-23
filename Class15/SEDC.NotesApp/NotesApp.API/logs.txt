@@ -1,0 +1,123 @@
+2022-07-31 13:01:38.557 +02:00 [INF] User profile is available. Using 'C:\Users\Drajo\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-07-31 13:01:39.481 +02:00 [INF] Now listening on: http://localhost:5043
+2022-07-31 13:01:39.485 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-07-31 13:01:39.486 +02:00 [INF] Hosting environment: Development
+2022-07-31 13:01:39.486 +02:00 [INF] Content root path: C:\Users\Drajo\Documents\GitHub\skwd10-net-09-aspnetwebapi-internal\Implementation\SEDC.NotesApp\NotesApp.API\
+2022-07-31 13:01:40.349 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5043/swagger/index.html - -
+2022-07-31 13:01:41.010 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5043/_vs/browserLink - -
+2022-07-31 13:01:41.011 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5043/_framework/aspnetcore-browser-refresh.js - -
+2022-07-31 13:01:41.013 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5043/swagger/index.html - - - 200 - text/html;charset=utf-8 669.6576ms
+2022-07-31 13:01:41.031 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5043/_framework/aspnetcore-browser-refresh.js - - - 200 11994 application/javascript;+charset=utf-8 19.9695ms
+2022-07-31 13:01:41.142 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5043/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 130.7938ms
+2022-07-31 13:01:41.226 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5043/swagger/v1/swagger.json - -
+2022-07-31 13:01:41.486 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5043/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 260.5746ms
+2022-07-31 13:02:57.916 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5043/api/user/authenticate application/json 52
+2022-07-31 13:02:58.656 +02:00 [INF] Executing endpoint 'NotesApp.API.Controllers.UserController.Authenticate (NotesApp.API)'
+2022-07-31 13:02:58.681 +02:00 [INF] Route matched with {action = "Authenticate", controller = "User"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Authenticate(InterfaceModels.LoginModel) on controller NotesApp.API.Controllers.UserController (NotesApp.API).
+2022-07-31 13:03:00.784 +02:00 [INF] Entity Framework Core 6.0.7 initialized 'NotesAppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.7' with options: None
+2022-07-31 13:03:04.988 +02:00 [INF] Executed DbCommand (63ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [u].[Id], [u].[FirstName], [u].[LastName], [u].[Password], [u].[Username]
+FROM [Users] AS [u]
+2022-07-31 13:03:05.678 +02:00 [INF] Executing OkObjectResult, writing value of type 'InterfaceModels.UserModel'.
+2022-07-31 13:03:05.688 +02:00 [INF] Executed action NotesApp.API.Controllers.UserController.Authenticate (NotesApp.API) in 7001.2394ms
+2022-07-31 13:03:05.689 +02:00 [INF] Executed endpoint 'NotesApp.API.Controllers.UserController.Authenticate (NotesApp.API)'
+2022-07-31 13:03:05.704 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5043/api/user/authenticate application/json 52 - 200 - application/json;+charset=utf-8 7787.6364ms
+2022-07-31 13:07:03.727 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5043/api/note - -
+2022-07-31 13:07:04.011 +02:00 [INF] Executing endpoint 'NotesApp.API.Controllers.NoteController.Get (NotesApp.API)'
+2022-07-31 13:07:04.013 +02:00 [INF] Route matched with {action = "Get", controller = "Note"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[InterfaceModels.NoteModel]] Get() on controller NotesApp.API.Controllers.NoteController (NotesApp.API).
+2022-07-31 13:07:04.977 +02:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+WhereSelectListIterator`2[[DataModels.NoteDto, DataModels, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[InterfaceModels.NoteModel, InterfaceModels, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2022-07-31 13:07:04.984 +02:00 [INF] Executed action NotesApp.API.Controllers.NoteController.Get (NotesApp.API) in 971.0259ms
+2022-07-31 13:07:04.985 +02:00 [INF] Executed endpoint 'NotesApp.API.Controllers.NoteController.Get (NotesApp.API)'
+2022-07-31 13:07:04.985 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5043/api/note - - - 200 - application/json;+charset=utf-8 1257.7619ms
+2022-07-31 13:07:17.872 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5043/api/note application/json 82
+2022-07-31 13:07:17.900 +02:00 [INF] Executing endpoint 'NotesApp.API.Controllers.NoteController.Post (NotesApp.API)'
+2022-07-31 13:07:17.901 +02:00 [INF] Route matched with {action = "Post", controller = "Note"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(InterfaceModels.NoteModel) on controller NotesApp.API.Controllers.NoteController (NotesApp.API).
+2022-07-31 13:07:17.921 +02:00 [INF] Entity Framework Core 6.0.7 initialized 'NotesAppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.7' with options: None
+2022-07-31 13:07:17.934 +02:00 [INF] Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [u].[Id], [u].[FirstName], [u].[LastName], [u].[Password], [u].[Username]
+FROM [Users] AS [u]
+2022-07-31 13:07:18.530 +02:00 [ERR] UNKNOWN Error: The member User of type DataModels.UserDto cannot be used as a parameter value
+2022-07-31 13:07:18.532 +02:00 [INF] Executing BadRequestObjectResult, writing value of type 'System.String'.
+2022-07-31 13:07:18.532 +02:00 [INF] Executed action NotesApp.API.Controllers.NoteController.Post (NotesApp.API) in 630.8019ms
+2022-07-31 13:07:18.532 +02:00 [INF] Executed endpoint 'NotesApp.API.Controllers.NoteController.Post (NotesApp.API)'
+2022-07-31 13:07:18.532 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5043/api/note application/json 82 - 400 - text/plain;+charset=utf-8 660.1716ms
+2022-07-31 13:07:36.947 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5043/api/note application/json 82
+2022-07-31 13:07:36.948 +02:00 [INF] Executing endpoint 'NotesApp.API.Controllers.NoteController.Post (NotesApp.API)'
+2022-07-31 13:07:36.949 +02:00 [INF] Route matched with {action = "Post", controller = "Note"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Post(InterfaceModels.NoteModel) on controller NotesApp.API.Controllers.NoteController (NotesApp.API).
+2022-07-31 13:07:37.019 +02:00 [INF] Entity Framework Core 6.0.7 initialized 'NotesAppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.7' with options: None
+2022-07-31 13:07:37.021 +02:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [u].[Id], [u].[FirstName], [u].[LastName], [u].[Password], [u].[Username]
+FROM [Users] AS [u]
+2022-07-31 13:08:02.474 +02:00 [INF] Executing OkObjectResult, writing value of type 'System.String'.
+2022-07-31 13:08:02.505 +02:00 [INF] Executed action NotesApp.API.Controllers.NoteController.Post (NotesApp.API) in 25556.615ms
+2022-07-31 13:08:02.507 +02:00 [INF] Executed endpoint 'NotesApp.API.Controllers.NoteController.Post (NotesApp.API)'
+2022-07-31 13:08:02.507 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5043/api/note application/json 82 - 200 - text/plain;+charset=utf-8 25559.7920ms
+2022-07-31 13:08:08.269 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5043/api/note - -
+2022-07-31 13:08:08.270 +02:00 [INF] Executing endpoint 'NotesApp.API.Controllers.NoteController.Get (NotesApp.API)'
+2022-07-31 13:08:08.270 +02:00 [INF] Route matched with {action = "Get", controller = "Note"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[InterfaceModels.NoteModel]] Get() on controller NotesApp.API.Controllers.NoteController (NotesApp.API).
+2022-07-31 13:08:08.271 +02:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+WhereSelectListIterator`2[[DataModels.NoteDto, DataModels, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[InterfaceModels.NoteModel, InterfaceModels, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2022-07-31 13:08:08.272 +02:00 [INF] Executed action NotesApp.API.Controllers.NoteController.Get (NotesApp.API) in 1.3875ms
+2022-07-31 13:08:08.272 +02:00 [INF] Executed endpoint 'NotesApp.API.Controllers.NoteController.Get (NotesApp.API)'
+2022-07-31 13:08:08.272 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5043/api/note - - - 200 - application/json;+charset=utf-8 2.2145ms
+2022-07-31 13:13:24.839 +02:00 [INF] User profile is available. Using 'C:\Users\Drajo\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2022-07-31 13:13:25.151 +02:00 [INF] Now listening on: http://localhost:5043
+2022-07-31 13:13:25.157 +02:00 [INF] Application started. Press Ctrl+C to shut down.
+2022-07-31 13:13:25.157 +02:00 [INF] Hosting environment: Development
+2022-07-31 13:13:25.157 +02:00 [INF] Content root path: C:\Users\Drajo\Documents\GitHub\skwd10-net-09-aspnetwebapi-internal\Implementation\SEDC.NotesApp\NotesApp.API\
+2022-07-31 13:13:25.988 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5043/swagger/index.html - -
+2022-07-31 13:13:26.848 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5043/_framework/aspnetcore-browser-refresh.js - -
+2022-07-31 13:13:26.858 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5043/_framework/aspnetcore-browser-refresh.js - - - 200 11994 application/javascript;+charset=utf-8 8.0366ms
+2022-07-31 13:13:26.860 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5043/_vs/browserLink - -
+2022-07-31 13:13:26.872 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5043/swagger/index.html - - - 200 - text/html;charset=utf-8 893.5578ms
+2022-07-31 13:13:27.004 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5043/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 144.5788ms
+2022-07-31 13:13:27.122 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5043/swagger/v1/swagger.json - -
+2022-07-31 13:13:27.480 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5043/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 357.8500ms
+2022-07-31 13:13:59.864 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5043/api/note - -
+2022-07-31 13:14:00.405 +02:00 [INF] Executing endpoint 'NotesApp.API.Controllers.NoteController.Get (NotesApp.API)'
+2022-07-31 13:14:00.417 +02:00 [INF] Route matched with {action = "Get", controller = "Note"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.Collections.Generic.IEnumerable`1[InterfaceModels.NoteModel]] Get() on controller NotesApp.API.Controllers.NoteController (NotesApp.API).
+2022-07-31 13:14:01.162 +02:00 [INF] Executing OkObjectResult, writing value of type 'System.Linq.Enumerable+WhereSelectListIterator`2[[DataModels.NoteDto, DataModels, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[InterfaceModels.NoteModel, InterfaceModels, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2022-07-31 13:14:01.177 +02:00 [INF] Executed action NotesApp.API.Controllers.NoteController.Get (NotesApp.API) in 750.9695ms
+2022-07-31 13:14:01.180 +02:00 [INF] Executed endpoint 'NotesApp.API.Controllers.NoteController.Get (NotesApp.API)'
+2022-07-31 13:14:01.187 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5043/api/note - - - 200 - application/json;+charset=utf-8 1323.1288ms
+2022-07-31 13:16:17.230 +02:00 [INF] Request starting HTTP/1.1 POST http://localhost:5043/api/user/register application/json 150
+2022-07-31 13:16:17.232 +02:00 [INF] Executing endpoint 'NotesApp.API.Controllers.UserController.Register (NotesApp.API)'
+2022-07-31 13:16:17.249 +02:00 [INF] Route matched with {action = "Register", controller = "User"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Register(InterfaceModels.RegisterModel) on controller NotesApp.API.Controllers.UserController (NotesApp.API).
+2022-07-31 13:16:18.580 +02:00 [INF] Entity Framework Core 6.0.7 initialized 'NotesAppDbContext' using provider 'Microsoft.EntityFrameworkCore.SqlServer:6.0.7' with options: None
+2022-07-31 13:16:19.507 +02:00 [INF] Executed DbCommand (81ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [u].[Id], [u].[FirstName], [u].[LastName], [u].[Password], [u].[Username]
+FROM [Users] AS [u]
+2022-07-31 13:16:19.896 +02:00 [INF] Executed DbCommand (63ms) [Parameters=[@p0='?' (Size = 4000), @p1='?' (Size = 4000), @p2='?' (Size = 4000), @p3='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+INSERT INTO [Users] ([FirstName], [LastName], [Password], [Username])
+VALUES (@p0, @p1, @p2, @p3);
+SELECT [Id]
+FROM [Users]
+WHERE @@ROWCOUNT = 1 AND [Id] = scope_identity();
+2022-07-31 13:16:19.955 +02:00 [INF] USER registered with username drage
+2022-07-31 13:16:19.956 +02:00 [INF] Executing OkObjectResult, writing value of type 'System.String'.
+2022-07-31 13:16:19.956 +02:00 [INF] Executed action NotesApp.API.Controllers.UserController.Register (NotesApp.API) in 2707.0211ms
+2022-07-31 13:16:19.956 +02:00 [INF] Executed endpoint 'NotesApp.API.Controllers.UserController.Register (NotesApp.API)'
+2022-07-31 13:16:19.962 +02:00 [INF] Request finished HTTP/1.1 POST http://localhost:5043/api/user/register application/json 150 - 200 - text/plain;+charset=utf-8 2732.5750ms
+2022-07-31 14:07:48.843 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5043/api/note/100 - -
+2022-07-31 14:07:48.893 +02:00 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '2022-07-22 16:47:44', Current time: '2022-07-31 12:07:48'.
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateTokenPayload(JwtSecurityToken jwtToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateJWS(String token, TokenValidationParameters validationParameters, BaseConfiguration currentConfiguration, SecurityToken& signatureValidatedToken, ExceptionDispatchInfo& exceptionThrown)
+--- End of stack trace from previous location ---
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, JwtSecurityToken outerToken, TokenValidationParameters validationParameters, SecurityToken& signatureValidatedToken)
+   at System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler.ValidateToken(String token, TokenValidationParameters validationParameters, SecurityToken& validatedToken)
+   at Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler.HandleAuthenticateAsync()
+2022-07-31 14:07:49.071 +02:00 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo: '2022-07-22 16:47:44', Current time: '2022-07-31 12:07:48'.
+2022-07-31 14:07:49.073 +02:00 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2022-07-31 14:07:49.085 +02:00 [INF] AuthenticationScheme: Bearer was challenged.
+2022-07-31 14:07:49.085 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5043/api/note/100 - - - 401 0 - 248.0132ms
+2022-07-31 14:08:03.250 +02:00 [INF] Request starting HTTP/1.1 GET http://localhost:5043/api/note/100 - -
+2022-07-31 14:08:03.251 +02:00 [INF] Executing endpoint 'NotesApp.API.Controllers.NoteController.Get (NotesApp.API)'
+2022-07-31 14:08:03.274 +02:00 [INF] Route matched with {action = "Get", controller = "Note"}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[InterfaceModels.NoteModel] Get(Int32) on controller NotesApp.API.Controllers.NoteController (NotesApp.API).
+2022-07-31 14:08:04.707 +02:00 [ERR] NOTE 100 for user 1: Note not found
+2022-07-31 14:08:04.708 +02:00 [INF] Executing BadRequestObjectResult, writing value of type 'System.String'.
+2022-07-31 14:08:04.708 +02:00 [INF] Executed action NotesApp.API.Controllers.NoteController.Get (NotesApp.API) in 1433.3699ms
+2022-07-31 14:08:04.708 +02:00 [INF] Executed endpoint 'NotesApp.API.Controllers.NoteController.Get (NotesApp.API)'
+2022-07-31 14:08:04.708 +02:00 [INF] Request finished HTTP/1.1 GET http://localhost:5043/api/note/100 - - - 400 - text/plain;+charset=utf-8 1458.0171ms

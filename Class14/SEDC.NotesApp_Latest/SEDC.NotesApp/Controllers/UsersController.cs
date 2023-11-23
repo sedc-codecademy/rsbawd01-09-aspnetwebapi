@@ -29,7 +29,7 @@ namespace SEDC.NotesApp.Controllers
                 Log.Information($"Registration model info: FirstName: {registerUserDto.FirstName}, LastName: {registerUserDto.LastName}");
                
                 _userService.RegisterUser(registerUserDto);
-                
+
                 Log.Information($"Successfully registered {registerUserDto.Username}.");
                 
                 return StatusCode(StatusCodes.Status201Created, "User created!");
